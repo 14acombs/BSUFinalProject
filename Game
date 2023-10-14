@@ -1,0 +1,589 @@
+def adventure():
+  global key
+  global card
+  global bracelet
+  key = "guestRoom"
+  box = "livingRoom"
+  card = "bedroom"
+  bracelet = "livingRoom"
+  map = (makePicture(getMediaPath("BarbieHouse.jpg")))
+  show (map)
+  location = "Porch"
+  direction = ""
+  name = requestString("What is your name?")
+  showInformation(showIntroduction())
+  roomList =[]
+  while not(direction == "end"):
+    #The idea for the next two functions was in place but the time to complete was not
+    #writeData(scoreData)
+    #addPlayer(name)
+    playRoomSound(location, roomList)
+    showRoom(location, map, roomList)
+    items(location)
+    actions(location, direction)
+    direction = requestString("Which Direction?")
+    printNow("You typed: "+direction) 
+    actions(location, direction)
+    location = pickRoom(direction, location)
+     
+  
+def showIntroduction():
+  A = "Welcome to the Barbie Dream House! "
+  B= "In each Room, you will be told which directions you can go to have fun! "
+  C = "You can move north, south, east, or west by typing that direction. "
+  Z = "The goal is to collect multiple objects throughout the house and put together a gift for Kelly! "
+  D = "Type help to replay introduction. "
+  E = "Type End to end the program."
+  return A+B+C+Z+D+E
+  
+def playRoomSound(room, roomList):
+#plays the sound for each room, then asks the user if they want to play it again if they reenter a room.
+  if room == "LowerHall":
+    sound = makeSound(getMediaPath("walking.wav"))
+    room = roomList.count("LowerHall")
+    if room != 0:
+      A = requestString("Would you like to hear the sound again?")
+      if A == "yes":
+        play(sound)
+    else:
+      play(sound)
+  if room == "UpperHall":
+    sound1 = makeSound(getMediaPath("walking.wav"))
+    room = roomList.count("UpperHall")
+    if room != 0:
+      A = requestString("Would you like to hear the sound again?")
+      if A == "yes":
+        play(sound1)
+    else:
+      play(sound1)
+  if room == "Porch":
+    sound2 = makeSound(getMediaPath("heyBarbie.wav"))#will never stop being creepy, only gets worse each time you hear it
+    room = roomList.count("Porch")
+    if room != 0:
+      A = requestString("Would you like to hear the sound again?")
+      if A == "yes":
+        play(sound2)
+    else:
+      play(sound2)
+  if room == "bedroom":
+    sound3 = makeSound(getMediaPath("snore.wav"))
+    room = roomList.count("bedroom")
+    if room != 0:
+      A = requestString("Would you like to hear the sound again?")
+      if A == "yes":
+        play(sound3)
+    else:
+      play(sound3)
+  if room == "bath":
+    sound4 = makeSound(getMediaPath("bubbles.wav"))
+    room = roomList.count("bath")
+    if room != 0:
+      A = requestString("Would you like to hear the sound again?")
+      if A == "yes":
+        play(sound4)
+    else:
+      play(sound4)
+  if room == "kitchen":
+    sound5 = makeSound(getMediaPath("cupcake.wav"))
+    room = roomList.count("kitchen")
+    if room != 0:
+      A = requestString("Would you like to hear the sound again?")
+      if A == "yes":
+        play(sound5)
+    else:
+      play(sound5)
+  if room == "guestRoom":
+    sound6 = makeSound(getMediaPath("snore.wav"))
+    room = roomList.count("guestRoom")
+    if room != 0:
+      A = requestString("Would you like to hear the sound again?")
+      if A == "yes":
+        play(sound6)
+    else:
+      play(sound6)
+  if room == "livingRoom":
+    sound7 = makeSound(getMediaPath("tv.wav"))
+    room = roomList.count("livingRoom")
+    if room != 0:
+      A = requestString("Would you like to hear the sound again?")
+      if A == "yes":
+        play(sound7)
+    else:
+      play(sound7)
+
+def items(location):
+  global key
+  global card
+  global bracelet
+   #Allowing the player to pick up or drop the key in any room
+  if key == location:
+   #if the player is in the same room as the key, the function requests a string
+    if key == "livingRoom":
+      key = requestString("You found the key! Do you want to pick it up?")
+      if key == "yes":
+        key = "player"
+        showInformation("You picked up a key, you can drop it in any room by typing 'drop key.' ")
+    if key == "guestRoom":
+      key = requestString("You found the key! Do you want to pick it up?")
+      if key == "yes":
+        key = "player"
+        showInformation("You picked up a key, you can drop it in any room by typing 'drop key.' ")
+    if key == "bedroom":
+      key = requestString("You found the key! Do you want to pick it up?")
+      if key == "yes":
+        key = "player"
+        showInformation("You picked up a key, you can drop it in any room by typing 'drop key.' ")
+    if key == "bath":
+      key = requestString("You found the key! Do you want to pick it up?")
+      if key == "yes":
+        key = "player"
+        showInformation("You picked up a key, you can drop it in any room by typing 'drop key.' ")
+    if key == "kitchen":
+      key = requestString("You found the key! Do you want to pick it up?")
+      if key == "yes":
+        key = "player"
+        showInformation("You picked up a key, you can drop it in any room by typing 'drop key.' ")
+    if key == "LowerHall":
+      key = requestString("You found the key! Do you want to pick it up?")
+      if key == "yes":
+        key = "player"
+        showInformation("You picked up a key, you can drop it in any room by typing 'drop key.' ")
+    if key == "UpperHall":
+      key = requestString("You found the key! Do you want to pick it up?")
+      if key == "yes":
+        key = "player"
+        showInformation("You picked up a key, you can drop it in any room by typing 'drop key.' ")
+  #Allows player to pick up or drop the card in any room
+  if card == location:
+    if card == "livingRoom":
+      card = requestString("You found the card! Do you want to pick it up?")
+      if card == "yes":
+        card = "player"
+        showInformation("You picked up a card, you can drop it in any room by typing 'drop card.' ")
+      if card == "guestRoom":
+        card = requestString("You found the card! Do you want to pick it up?")
+        if card == "yes":
+          card = "player"
+          showInformation("You picked up a card, you can drop it in any room by typing 'drop card.' ")
+      if card == "bedroom":
+        card = requestString("You found the card! Do you want to pick it up?")
+        if card == "yes":
+          card = "player"
+          showInformation("You picked up a card, you can drop it in any room by typing 'drop card.' ")
+      if card == "bath":
+        card = requestString("You found the card! Do you want to pick it up?")
+        if card == "yes":
+          card = "player"
+          showInformation("You picked up a card, you can drop it in any room by typing 'drop card.' ")
+      if card == "kitchen":
+        card = requestString("You found the card! Do you want to pick it up?")
+        if card == "yes":
+          card = "player"
+          showInformation("You picked up a card, you can drop it in any room by typing 'drop card.' ")
+      if card == "LowerHall":
+        card = requestString("You found the card! Do you want to pick it up?")
+        if card == "yes":
+          card = "player"
+          showInformation("You picked up a card, you can drop it in any room by typing 'drop card.' ")
+      if card == "UpperHall":
+        card = requestString("You found the card! Do you want to pick it up?")
+        if card == "yes":
+          card = "player"
+          showInformation("You picked up a card, you can drop it in any room by typing 'drop card.' ")
+  #Allows player to pick up or drop the bracelet in any room
+  if bracelet == location:
+     if bracelet == "livingRoom":
+      bracelet = requestString("You found the bracelet! Do you want to pick it up?")
+      if bracelet == "yes":
+        bracelet = "player"
+        showInformation("You picked up a bracelet, you can drop it in any room by typing 'drop bracelet.' ")
+     if bracelet == "guestRoom":
+      bracelet = requestString("You found the bracelet! Do you want to pick it up?")
+      if bracelet == "yes":
+        bracelet = "player"
+        showInformation("You picked up a bracelet, you can drop it in any room by typing 'drop bracelet.' ")
+     if bracelet == "bedroom":
+      bracelet = requestString("You found the bracelet! Do you want to pick it up?")
+      if bracelet == "yes":
+        bracelet = "player"
+        showInformation("You picked up a bracelet, you can drop it in any room by typing 'drop bracelet.' ")
+     if bracelet == "bath":
+      bracelet = requestString("You found the bracelet! Do you want to pick it up?")
+      if bracelet == "yes":
+        bracelet = "player"
+        showInformation("You picked up a bracelet, you can drop it in any room by typing 'drop bracelet.' ")
+     if bracelet == "kitchen":
+      bracelet = requestString("You found the bracelet! Do you want to pick it up?")
+      if bracelet == "yes":
+        bracelet = "player"
+        showInformation("You picked up a bracelet, you can drop it in any room by typing 'drop bracelet.' ")
+     if bracelet == "LowerHall":
+      bracelet = requestString("You found the bracelet! Do you want to pick it up?")
+      if bracelet == "yes":
+        bracelet = "player"
+        showInformation("You picked up a bracelet, you can drop it in any room by typing 'drop bracelet.' ")
+     if bracelet == "UpperHall":
+      bracelet = requestString("You found the bracelet! Do you want to pick it up?")
+      if bracelet == "yes":
+        bracelet = "player"
+        showInformation("You picked up a bracelet, you can drop it in any room by typing 'drop bracelet.' ")
+        
+def actions(room, direction):
+  #The key is the only item that performs an action.
+  #if the player tries to enter the living room, without the key, it is supposed to turn the player back to the hall, but I cannot puzzle out why the code does not work 
+  global key
+  if room == "LowerHall":
+    if direction == "east":
+      B = requestString("The door is locked, would you like to use the key?")
+      if B == "yes":
+        if key == "player":
+          showInformation("You unlocked the door.")
+          return "livingRoom"
+        else:
+          showInformation("You must have the key to unlock the door.")
+          return "LowerHall"
+      else:
+        showInformation("You must unlock the door to enter the living room.")
+        return "LowerHall"
+    
+
+def showRoom(room, map, roomList):
+#first function draft the image copied every time user enters the room
+#second function draft the image only copies if this is the first time the user enters the room, and won't copy again
+  printNow("===========")
+  if room == "Porch":
+    pict = makePicture(getMediaPath("porch.jpg"))
+    room = roomList.count("Porch")
+    if room == 0:
+      copy(pict, map,350, 510 )
+      repaint(map)
+      showPorch()
+      roomList.append("Porch")
+      showInformation(showPorch())
+      return(map, roomList)
+    else:
+      showInformation(showPorch())
+      return(map, roomList)
+  if room == "LowerHall":
+    room = roomList.count("LowerHall")
+    if room == 0:
+      pict1 = makePicture(getMediaPath("lowerhall.jpg"))
+      copy(pict1, map,300,250)
+      repaint(map)
+      showLowerHall()
+      roomList.append("LowerHall")
+      showInformation(showLowerHall())
+      return(map, roomList)
+    else:
+      showInformation(showLowerHall())
+      return(map, roomList)
+  if room == "UpperHall":
+    room = roomList.count("UpperHall")
+    if room == 0:
+      pict2 = makePicture(getMediaPath("upperhall.jpg"))
+      copy(pict2, map,300,92)
+      repaint(map)
+      showUpperHall()
+      roomList.append("UpperHall")
+      showInformation(showUpperHall())
+      return(map, roomList)
+    else:
+      showInformation(showUpperHall())
+      return(map, roomList)
+  if room == "livingRoom":
+    room = roomList.count("livingRoom")
+    if room == 0:
+      pict3 = makePicture(getMediaPath("livingroom.jpg"))
+      copy(pict3, map,551,295)
+      repaint(map)
+      showlivingRoom()
+      roomList.append("livingRoom")
+      showInformation(showlivingRoom())
+      return(map, roomList)    
+    else:
+      showInformation(showlivingRoom())
+      return(map, roomList)
+  if room == "guestRoom":
+    room = roomList.count("guestRoom")
+    if room == 0:
+      pict1 = makePicture(getMediaPath("guestroom.jpg"))
+      copy(pict1, map,560,101)
+      repaint(map)
+      showguestRoom()
+      roomList.append("guestRoom")
+      showInformation(showguestRoom())
+      return(map, roomList)   
+    else:
+      showInformation(showguestRoom())
+      return(map, roomList)
+  if room == "bedroom":
+    room = roomList.count("bedroom")
+    if room == 0:
+      pict1 = makePicture(getMediaPath("bedroom.jpg"))
+      copy(pict1, map,46,75)
+      repaint(map)
+      showbedroom()
+      roomList.append("bedroom")
+      showInformation(showbedroom()) 
+      return(map, roomList)
+    else:
+      showInformation(showbedroom())
+      return(map, roomList)
+  if room == "bath":
+    room = roomList.count("bath")
+    if room == 0:
+      pict1 = makePicture(getMediaPath("bathroom.jpg"))
+      copy(pict1, map,46,247)
+      repaint(map)
+      showbath()
+      roomList.append("bath")
+      showInformation(showbath())
+      return(map, roomList)
+    else:
+      showInformation(showbath())
+      return(map, roomList)
+  if room == "kitchen":
+    room = roomList.count("kitchen")
+    if room == 0:
+      pict1 = makePicture(getMediaPath("kitchen.jpg"))
+      copy(pict1, map,43,450)
+      repaint(map)
+      showkitchen()
+      roomList.append("kitchen")
+      showInformation(showkitchen())
+      return(map, roomList)
+    else:
+      showInformation(showkitchen())
+      return(map, roomList)
+  
+    
+def pickRoom(direction, room):
+  global key
+  global card
+  global bracelet
+  if(direction == "End"):
+    printNow("Goodbye!")
+    return "Exit"
+  if direction == "help":
+    showIntroduction()
+    return room
+  if direction == "drop key":
+    key = room
+    showInformation("You dropped the key.")
+    return room
+  if direction == "drop card":
+    card = room
+    showInformation("You dropped the card.")
+    return room
+  if direction == "drop bracelet":
+    bracelet = room
+    showInformation("You dropped the bracelet.")
+    return room
+  if room == "Porch":
+    if direction == "north":
+      return "LowerHall"
+    if direction == "south":
+      showInformation ("You want to go into the house, right?")
+      return "Porch"
+    if direction == "east":
+      showInformation ("The house is to the North, let's go inside!")
+      return "Porch"
+    if direction == "west":
+      showInformation ("Let's go into the house, it's to the North!")
+      return"Porch"
+  if room == "LowerHall":
+    if direction == "north":
+      return "UpperHall"
+    if direction == "west":
+      return "kitchen"
+    #Cannot tell if this is overriding the actions function or if actions() is not working completely
+    #if direction == "east":
+     # return "livingRoom"
+    if direction == "south":
+      showInformation ("You don't want to go back outside!")
+      return "LowerHall"
+  if room == "UpperHall":
+    if direction == "west":
+      return "bedroom"
+    if direction == "east":
+      return "guestRoom"
+    if direction == "north":
+      showInformation ("This is the end of the Hall")
+      return "UpperHall"
+    if direction == "south":
+      return "LowerHall"
+  if room == "livingRoom":
+    if direction == "west":
+      return "LowerHall"
+    if direction == "north":
+      showInformation ("The wall is covered in paintings")
+      return "livingRoom"
+    if direction == "east":
+      showInformation ("The lamp in this corner is coated in glitter.")
+      return "livingRoom"
+    if direction == "south":
+      showInformation ("Let's go back out into the hall!")
+      return "livingRoom"
+        ##Can only go out west from guest room, other directions prompt for an infinite loop of requesting the direction string
+  if room == "guestRoom":
+    if direction == "west":
+      return "UpperHall"
+    if direction == "east":
+      showInformation ("The bed sits along this wall.")
+      return "guestRoom"
+    if direction == "south":
+      showInformation ("This is where Kelly keeps her stuffed animals!")
+      return "guestRoom"
+    if direction == "south":
+      showInformation ("Let's go back into the hall!")
+      return "guestRoom"
+  if room == "bedroom":
+    if direction == "north":
+      showInformation ("There is a window to the North, but it is covered by a curtain.")
+      return "bedroom"
+    if direction == "east":
+      return "UpperHall"
+    if direction == "south":
+      return "bath"
+    if direction == "west":
+      showInformation ("A large, pink bed sits along the wall.")
+      return "bedroom"
+  if room == "kitchen":
+    if direction == "east":
+      return "LowerHall"
+    if direction == "west":
+      showInformation ("This is where the stove and the over are!")
+      return  "kitchen"
+    if direction == "north":
+      return "bath"
+    if direction == "south":
+      showInformation ("The sink and refrigerator shine a bright white along the wall.")
+      return "kitchen"
+  if room =="bath":
+    if direction == "north":
+      return "bedroom"
+    if direction == "south":
+      return "kitchen"
+    if direction == "east":
+      showInformation ("That's the bath.")
+      return "bath"
+    if direction == "west":
+      showInformation ("The entire bathroom is pink, except for the white sink, let's go somewhere else.")
+      return "bath"
+  
+def showPorch():
+  A="You are in the entry way of the house. Barbie is there to greet you. "
+  B="Barbie waves, 'Hi! Good to see you!'."
+  C="'Come inside and I'll show you around! Don't forget, we have to make a present for Kelly!' "
+  return A+B+C
+  
+def showLowerHall():
+  A = "You are in the lower hall of the house. Barbie gestures at the space. "
+  B = "'This is my grand hallway! "
+  C = " The kitchen is to the west, living room to the east, and the upper hall to the north."
+  return A+B+C
+  
+def showlivingRoom():
+  A = "You are in the living room of the house. The room is decked out in pink, a small bracelet sits up high on a bookshelf. "
+  B = "'I've had a bracelet set aside for Kelly for a few weeks, take a look!' "
+  C = "The bracelet will be prefect to match the card in my bedroom.' "
+  return A+B+C
+  
+def showguestRoom():
+  A = "You are in the guest room, a bed with pink throw pillows sits by the window. "
+  B = "There is a key that sits upon the shelves. "
+  C = "'Oh! There's that silly little key! We can finally open the room!' "
+  return A+B+C
+  
+def showUpperHall():
+  A = "You are in the upper hall of the house. A large picture of Barbie is on the wall. "
+  B = "'Don't worry about that old thing, it was a gift. "
+  C = "You can go east, south, and west."
+  return A+B+C
+  
+def showkitchen():
+  A = "You are now in the Kitchen of the house. There is a kettle whistling on the stove. "
+  B = "'Oh, the kettle is ready! Would you like tea?' "
+  C = "You can go back into the lower hall."
+  return A+B+C
+  
+def showbath():
+  A = "You are now in the Bath. It is completely normal looking. "
+  B = "Besides the bath tube is pink. "
+  C = "You can go into the bedroom or the kitchen."
+  return A+B+C
+  
+def showbedroom():
+  A = "You are now in the bedroom. A card sits on a desk by the window. "
+  B = "'Look! That's the card for Kelly! Grab it and we can finish her present!' "
+  C = "You can go south to the bathroom or east to the upper hall."
+  return A+B+C
+  
+def copy(source, target, targX, targY):
+  targetX = targX
+  for sourceX in range (0, getWidth(source)):
+    targetY = targY
+    for sourceY in range (0, getHeight(source)):
+      px = getPixel(source, sourceX, sourceY)
+      tx= getPixel(target, targetX, targetY)   
+      setColor(tx, getColor(px))
+      targetY = targetY +1
+    targetX = targetX + 1
+    
+def readData():
+  file=open(getMediaPath("scores.txt"), "rt")
+  data=file.read()
+  file.close()
+  return data
+ 
+def scoreData():
+  rawData=readData()
+  rawData=removeBlankLines(rawData)
+  playerList=rawData.split("\n")
+  playerList.sort()
+  scoreData=[]
+  for player in playerList:
+    player=player.split(":")
+    if(player !="''"):
+      scoreData=scoreData+[player]
+  return scoreData
+ 
+def removeBlankLines(string):
+  while (string.find("\n\n") != -1):     
+    string = string.replace("\n\n","\n")
+  if(string.startswith("\n")):           
+    string = string[1:]
+  if(string.endswith("\n")):             
+    string = string[:len(string) - 1]
+  return string
+ 
+#def findPlayer(name):
+#  index = 0
+#  playerFound=false
+#  for player in scoreData():
+#    if(player[0]==name):
+#      playerFound=true 
+#      index = index + 1
+#  break 
+#  if (playerFound):
+#    return index
+#  else:
+#    return -1 
+ 
+def writeData(scoreData):
+  file=open(getMediaPath("scores.txt"), "wt")
+  file.write(scoreData[0][0] + ":" + classData[0][1])
+  for x in range(1,len(scoreData)):
+    file.write("\n" + str(scoreData[x][0]) + ":" + str(scoreData[x][1]))
+  file.close()
+ 
+def addPlayer(name):
+  global score
+  data = scoreData()
+  index = findPlayer(name)
+  if(index == -1):
+     data.append([name,score])
+  else:
+     if(score > data[index][1]):
+       data[index][1]= score
+  writeData(data)         
